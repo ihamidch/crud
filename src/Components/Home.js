@@ -5,7 +5,12 @@ import Employees from './Employees'
 import { Link,useNavigate } from 'react-router-dom'
 
 const Home = () => {
-    let histroy = useNavigate()      
+    let histroy = useNavigate()   
+    const handleEdit = (id,name,email) => {
+        localStorage.setItem('name',name);
+        localStorage.setItem('email',email);
+        localStorage.setItem('id',id);
+    }   
     const handleDelete = (id) => {
         var index = Employees.map(function(item) {  return item.id; }).indexOf(id);
         Employees.splice(index, 1); 
@@ -35,7 +40,7 @@ const Home = () => {
                                     <Button variant="danger" onClick={()=>handleDelete(item.id)}>Delete</Button>
                                     &nbsp;
                                     <Link to={`/edit/${item.id}`}>
-                                    <Button variant="primary"onClick={()=>alert(item.id)}>Edit</Button>
+                                    <Button variant="primary"onClick={()=>handleEdit(item.id,item.name,item.email)}>Edit</Button>
                                     </Link>  
                                 </td>
                             </tr>
